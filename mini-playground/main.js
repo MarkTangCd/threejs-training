@@ -22,7 +22,16 @@ function init() {
     side: THREE.DoubleSide,
   });
   const mesh = new THREE.Mesh(geometry, material);
+  mesh.rotation.x = 2;
   scene.add(mesh);
+
+  const edges = new THREE.EdgesGeometry(geometry);
+  const line = new THREE.LineSegments(
+    edges,
+    new THREE.LineBasicMaterial({ color: 0xffffff, linewidth: 100 })
+  );
+  line.rotation.x = 2;
+  scene.add(line);
 
   camera.position.set(0, 0, 30);
   camera.lookAt(scene.position);
