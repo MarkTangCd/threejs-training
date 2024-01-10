@@ -38,6 +38,11 @@ function init() {
   const middleLine = createMiddleLine();
   scene.add(middleLine);
 
+  // create goal line
+  const [leftLine, rightLine] = createGoalLine();
+  scene.add(leftLine);
+  scene.add(rightLine);
+
   // border
   const edges = new THREE.EdgesGeometry(filedGeometry);
   const line = new THREE.LineSegments(
@@ -58,13 +63,35 @@ function init() {
 function createMiddleLine() {
   const material = new THREE.LineBasicMaterial({ color: 0xffffff });
   const points = [];
-  points.push(new THREE.Vector3(0, -5, 0));
-  points.push(new THREE.Vector3(0, 5, 0));
-  // TODO: the part of the line is gone
+  points.push(new THREE.Vector3(0, -5, -0.01));
+  points.push(new THREE.Vector3(0, 5, -0.01));
   const geometry = new THREE.BufferGeometry().setFromPoints(points);
   const line = new THREE.Line(geometry, material);
   line.rotation.x = 2;
   return line;
+}
+
+function createGoalLine() {
+  const material = new THREE.LineBasicMaterial({ color: 0xffffff });
+  const leftPoints = [];
+  leftPoints.push(new THREE.Vector3(-10, -2.5, -0.02));
+  leftPoints.push(new THREE.Vector3(-7.5, -2.5, -0.02));
+  leftPoints.push(new THREE.Vector3(-7.5, 2.5, -0.02));
+  leftPoints.push(new THREE.Vector3(-10, 2.5, -0.02));
+  const leftGeometry = new THREE.BufferGeometry().setFromPoints(leftPoints);
+  const leftLine = new THREE.Line(leftGeometry, material);
+  leftLine.rotation.x = 2;
+
+  const rightPoints = [];
+  rightPoints.push(new THREE.Vector3(10, -2.5, -0.02));
+  rightPoints.push(new THREE.Vector3(7.5, -2.5, -0.02));
+  rightPoints.push(new THREE.Vector3(7.5, 2.5, -0.02));
+  rightPoints.push(new THREE.Vector3(10, 2.5, -0.02));
+  const rightGeometry = new THREE.BufferGeometry().setFromPoints(rightPoints);
+  const rightLine = new THREE.Line(rightGeometry, material);
+  rightLine.rotation.x = 2;
+
+  return [leftLine, rightLine];
 }
 
 init();
