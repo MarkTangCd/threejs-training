@@ -26,10 +26,17 @@ function init() {
   mesh.rotation.x = 2;
   scene.add(mesh);
 
+  // middle circle
+  const whiteMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff });
+
+  const circleGeometry = new THREE.CircleGeometry(0.1, 32);
+  const circleMesh = new THREE.Mesh(circleGeometry, whiteMaterial);
+  circleMesh.position.set(0, 0, 0.1);
+  circleMesh.rotation.x = 1;
+  scene.add(circleMesh);
+
   const ringGeometry = new THREE.RingGeometry(0.9, 1, 20);
-  const ringMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff });
-  const ringMesh = new THREE.Mesh(ringGeometry, ringMaterial);
-  // ringMesh.position.y = 1;
+  const ringMesh = new THREE.Mesh(ringGeometry, whiteMaterial);
   ringMesh.position.set(0, 0, 9);
   ringMesh.rotation.x = 1;
   scene.add(ringMesh);
